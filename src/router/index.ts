@@ -1,25 +1,54 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    redirect: {
+      name: 'Login',
+    },
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: '/login',
+    name: 'Login',
+    meta: {
+      requiredUnauth: true,
+    },
+    component: () => import('@/views/Login.vue'),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    meta: {
+      requiredUnauth: true,
+    },
+    component: () => import('@/views/Register.vue'),
+  },
+  {
+    path: '/chat',
+    name: 'Chat',
+    meta: {
+      requiredAuth: true,
+    },
+    component: () => import('@/views/Chat.vue'),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+router.beforeEach(async (to, _, next) => {
+  if (!store.getters.isLogin && (to.meta.requiredAuth || to.meta.requiredUnauth)) {
+    await store.dispatch('getUser');
+  }
+  if (to.meta.requiredAuth && !store.getters.isLogin) {
+    next({ name: 'Login' });
+  } else if (to.meta.requiredUnauth && store.getters.isLogin) {
+    next({ name: 'Chat' });
+  } else next();
+});
+
+export default router;
