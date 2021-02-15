@@ -42,7 +42,7 @@ export default createStore({
       try {
         const res = await axios.post('/user/register', payload);
         if (res.status === 201) {
-          context.dispatch('login', {
+          await context.dispatch('login', {
             username: res.data.username,
             password: payload.password,
           });

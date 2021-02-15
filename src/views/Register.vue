@@ -1,5 +1,9 @@
 <template>
-  <form-register></form-register>
+  <div class="row mt-4">
+    <div class="col">
+      <form-register></form-register>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

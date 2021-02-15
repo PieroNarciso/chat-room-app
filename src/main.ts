@@ -4,17 +4,16 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import '@mdi/font/css/materialdesignicons.css';
-import 'bulma';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import BInput from './components/base/BInput.vue';
-import BIcon from './components/base/BIcon.vue';
 import BField from './components/base/BField.vue';
 import BBtn from './components/base/BBtn.vue';
 
 const app = createApp(App);
 
 app.component('b-input', BInput);
-app.component('b-icon', BIcon);
 app.component('b-field', BField);
 app.component('b-btn', BBtn);
 

@@ -1,14 +1,11 @@
 <template>
-  <p class="control" :class="clsHasIcon">
-    <input
-      v-bind="$attrs"
-      class="input"
-      :class="clsObject"
-      :value="modelValue"
-      @change="updateModelValue"
-    >
-    <slot v-if="hasIcon"></slot>
-  </p>
+  <input
+    v-bind="$attrs"
+    class="form-control"
+    :class="clsObject"
+    :value="modelValue"
+    @change="updateModelValue"
+  >
 </template>
 
 <script lang="ts">

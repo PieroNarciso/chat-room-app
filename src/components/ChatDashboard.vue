@@ -1,7 +1,8 @@
 <template>
-  <div class="chat-container">
-    <ul>
+  <div class="card chat-container">
+    <ul class="list-group list-group-flush">
       <li
+        class="list-group-item"
         v-for="msg in messages"
         :key="msg.id"
       >
@@ -13,15 +14,15 @@
     </ul>
   </div>
   <form @submit.prevent="sendMessage">
-    <b-field class="has-addons">
+    <div class="input-group">
       <b-input
         type="text"
         v-model="message"
         class="is-expanded"
         placeholder="Write Message"
-      ></b-input>
-      <b-btn class="is-primary">Send Message</b-btn>
-    </b-field>
+        ></b-input>
+      <b-btn class="btn-primary">Send Message</b-btn>
+    </div>
   </form>
 </template>
 
@@ -85,9 +86,9 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .chat-container{
-  height: 840px;
+  height: 85vh;
   overflow: auto;
 }
 </style>

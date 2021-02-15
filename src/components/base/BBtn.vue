@@ -1,19 +1,33 @@
 <template>
   <router-link
     v-if="to"
-    class="button"
+    class="btn"
     :class="clsBtn"
     v-bind="$attrs"
     :to="to"
+    :disabled="loading"
   >
+    <span
+      v-if="loading"
+      class="spinner-border spinner-border-sm"
+      role="status"
+      aria-hidden="true"
+    ></span>
     <slot></slot>
   </router-link>
   <button
     v-else
-    class="button"
+    class="btn"
     :class="clsBtn"
     v-bind="$attrs"
+    :disabled="loading"
   >
+    <span
+      v-if="loading"
+      class="spinner-border spinner-border-sm"
+      role="status"
+      aria-hidden="true"
+    ></span>
     <slot></slot>
   </button>
 </template>

@@ -1,19 +1,19 @@
 <template>
   <div class="card">
-    <div class="card-content">
-      <p class="title is-3">Register Form</p>
+    <div class="card-body">
+      <h5 class="card-title">Register Form</h5>
       <form @submit.prevent="register">
         <b-field label="Username">
           <b-input
             placeholder="Username..."
-            v-model="user.username"
+            v-model.trim="user.username"
           ></b-input>
         </b-field>
         <b-field label="Email">
           <b-input
             placeholder="Email..."
             type="email"
-            v-model="user.email"
+            v-model.trim="user.email"
           ></b-input>
         </b-field>
         <b-field label="Password">
@@ -23,25 +23,21 @@
             type="password"
           ></b-input>
         </b-field>
-        <b-field class="is-grouped">
-          <div class="control">
+        <div class="d-flex">
             <b-btn
-              class="is-link"
+              class="btn-primary me-2"
               :loading="isLoading"
             >
               Submit
             </b-btn>
-          </div>
-          <div class="control">
             <b-btn
-              class="is-link"
+              class="btn-outline-primary"
               to="/login"
               outlined
             >
               Login
             </b-btn>
-          </div>
-        </b-field>
+        </div>
       </form>
     </div>
   </div>
@@ -50,10 +46,12 @@
 <script lang="ts">
 import { ref, reactive, defineComponent } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
     const store = useStore();
+    const router = useRouter();
 
     const user = reactive({
       username: '',
@@ -67,6 +65,9 @@ export default defineComponent({
       isLoading.value = true;
       await store.dispatch('register', user);
       isLoading.value = false;
+      if (store.getters.isLogin) {
+        router.push({ name: 'Chat' });
+      }
     };
 
     return {

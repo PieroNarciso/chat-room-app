@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card">
     <chat-dashboard :userId="user.id"></chat-dashboard>
   </div>
 </template>

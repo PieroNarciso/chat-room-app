@@ -1,6 +1,6 @@
 <template>
-  <div class="field" v-bind="$attrs">
-    <label class="label">{{ label }}</label>
+  <div class="mb-3" v-bind="$attrs">
+    <label class="form-label">{{ label }}</label>
     <slot></slot>
   </div>
 </template>

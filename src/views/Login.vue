@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <form-login></form-login>
+  <div class="row mt-4">
+    <div class="col">
+      <form-login></form-login>
+    </div>
   </div>
 </template>
 

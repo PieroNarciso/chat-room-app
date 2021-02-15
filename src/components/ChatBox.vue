@@ -1,12 +1,11 @@
 <template>
-  <div class="tile is-parent">
-    <div
-      :class="clsColor"
-      class="tile is-child notification is-light p-2">
-      <p class="has-text-weight-medium">{{ message.user.username }}</p>
-      {{ message.msg }}
-    </div>
-  </div>
+  <li
+    class="list-group-item"
+    :class="clsColor"
+  >
+    <h6>{{ message.user.username }}</h6>
+    {{ message.msg }}
+  </li>
 </template>
 
 <script lang="ts">
@@ -26,8 +25,8 @@ export default defineComponent({
   },
   setup(props) {
     const clsColor = computed(() => ({
-      'is-info': props.message.user.id !== props.currentUserId,
-      'is-success': props.message.user.id === props.currentUserId,
+      'list-group-item-primary': props.message.user.id !== props.currentUserId,
+      'list-group-item-success': props.message.user.id === props.currentUserId,
     }));
 
     return {

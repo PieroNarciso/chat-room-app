@@ -1,35 +1,35 @@
 <template>
   <div class="card">
-    <div class="card-content">
-      <p class="title is-size-3">Login Form</p>
+    <div class="card-body">
+      <h5 class="card-title">Login Form</h5>
       <form @submit.prevent="login">
         <b-field label="Username">
           <b-input
             placeholder="Username"
-            v-model="username"
-            has-icon
-          >
-            <b-icon icon="mdi-account" left></b-icon>
-          </b-input>
+            v-model.trim="username"
+          ></b-input>
         </b-field>
         <b-field label="Password">
           <b-input
             placeholder="Password"
             v-model="password"
             type="password"
-            has-icon
-          >
-            <b-icon icon="mdi-lock" left></b-icon>
-          </b-input>
+          ></b-input>
         </b-field>
-        <b-field class="is-grouped">
-          <div class="control">
-            <b-btn class="is-link">Submit</b-btn>
+          <div class="d-flex">
+            <b-btn
+              class="me-2"
+              :loading="submitLoading"
+            >
+              Submit
+            </b-btn>
+            <b-btn
+              class="btn-outline-primary"
+              outlined to="/register"
+            >
+              Register
+            </b-btn>
           </div>
-          <div class="control">
-            <b-btn class="is-link" outlined to="/register">Register</b-btn>
-          </div>
-        </b-field>
       </form>
     </div>
   </div>
@@ -48,11 +48,15 @@ export default defineComponent({
     const username = ref('');
     const password = ref('');
 
+    const submitLoading = ref(false);
+
     const login = async () => {
+      submitLoading.value = true;
       await store.dispatch('login', {
         username: username.value,
         password: password.value,
       });
+      submitLoading.value = false;
       if (store.getters.isLogin) {
         router.push({ name: 'Chat' });
       }
@@ -62,6 +66,7 @@ export default defineComponent({
       username,
       password,
       login,
+      submitLoading,
     };
   },
 });
