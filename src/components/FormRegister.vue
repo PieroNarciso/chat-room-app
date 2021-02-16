@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card shadow">
     <div class="card-body">
       <h5 class="card-title">Register Form</h5>
       <form @submit.prevent="register">

@@ -1,7 +1,7 @@
 <template>
   <div class="d-grid" :class="clsPos">
     <div><em>{{ message.user.username }}</em></div>
-    <div :class="clsColor" class="py-1 px-3">
+    <div :class="clsColor" class="py-1 px-3 other-message">
       {{ message.msg }}
     </div>
   </div>
@@ -26,16 +26,15 @@ export default defineComponent({
     const selfMessage = computed(() => props.message.user.id === props.currentUserId);
 
     const clsColor = computed(() => {
+      console.log(selfMessage);
       if (selfMessage.value) {
         return [
-          'bg-primary',
-          'text-white',
+          'list-group-item-success',
           'self-message',
         ];
       }
       return [
-        'bg-secondary',
-        'text-white',
+        'list-group-item-primary',
         'other-message',
       ];
     });

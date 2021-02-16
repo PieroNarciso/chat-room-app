@@ -1,6 +1,8 @@
 <template>
-  <div class="card">
-    <chat-dashboard :userId="user.id"></chat-dashboard>
+  <div class="row align-items-center justify-content-center">
+    <div class="col-10">
+      <chat-dashboard :userId="user.id"></chat-dashboard>
+    </div>
   </div>
 </template>
 
@@ -39,3 +41,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+div.row {
+  height: 100vh;
+}
+</style>

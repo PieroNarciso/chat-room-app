@@ -1,12 +1,17 @@
 <template>
   <nav class="navbar navbar-dark bg-primary">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/">Home</router-link>
-
-      <div class="d-flex" v-if="isLogin">
-        <b-btn class="btn-secondary me-2">{{ user.username }}</b-btn>
-        <b-btn class="btn-secondary" @click="logout">Logout</b-btn>
-      </div>
+      <span
+        class="navbar-brand text-uppercase fw-bolder"
+      >
+        {{ user.username }}
+      </span>
+      <b-btn
+        class="btn-outline-light"
+        @click="logoutUser"
+      >
+        Logout
+      </b-btn>
     </div>
   </nav>
 </template>
@@ -16,23 +21,30 @@ import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
+import { User } from '@/types';
+
 export default defineComponent({
   setup() {
     const store = useStore();
     const router = useRouter();
 
-    const isLogin = computed(() => store.getters.isLogin);
-    const user = computed(() => store.getters.user);
-    const logout = async () => {
+    const user = computed<User>(() => store.getters.user);
+
+    const logoutUser = async () => {
       await store.dispatch('logoutUser');
       router.push({ name: 'Home' });
     };
 
     return {
-      isLogin,
       user,
-      logout,
+      logoutUser,
     };
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.navbar {
+  border-radius: 6px 6px 0 0;
+}
+</style>

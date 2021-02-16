@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card shadow">
     <div class="card-body">
       <h5 class="card-title">Login Form</h5>
       <form @submit.prevent="login">
@@ -18,7 +18,7 @@
         </b-field>
           <div class="d-flex">
             <b-btn
-              class="me-2"
+              class="btn-primary me-2"
               :loading="submitLoading"
             >
               Submit

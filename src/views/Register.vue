@@ -1,6 +1,6 @@
 <template>
-  <div class="row mt-4">
-    <div class="col">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-8">
       <form-register></form-register>
     </div>
   </div>
@@ -16,3 +16,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+div.row {
+  height: 100vh;
+}
+</style>
